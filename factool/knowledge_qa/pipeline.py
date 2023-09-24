@@ -17,15 +17,16 @@ class knowledge_qa_pipeline(pipeline):
             self.tool = google_search(snippet_cnt = snippet_cnt)
         elif(search_type == 'local'):
             self.tool = local_search(snippet_cnt = snippet_cnt, data_link=data_link, embedding_link=Embed_link)
-        with open(os.path.join(self.prompts_path, "claim_extraction.yaml"), 'r') as file:
-            data = yaml.load(file, Loader=yaml.FullLoader)
+        with open(os.path.join(self.prompts_path, "claim_extraction.yaml"), 'r', encoding='utf-8') as file:
+             data = yaml.load(file, Loader=yaml.FullLoader)
+
         self.claim_prompt = data['knowledge_qa']
 
-        with open(os.path.join(self.prompts_path, 'query_generation.yaml'), 'r') as file:
+        with open(os.path.join(self.prompts_path, 'query_generation.yaml'), 'r', encoding='utf-8') as file:
             data = yaml.load(file, Loader=yaml.FullLoader)
         self.query_prompt = data['knowledge_qa']
 
-        with open(os.path.join(self.prompts_path, 'agreement_verification.yaml'), 'r') as file:
+        with open(os.path.join(self.prompts_path, 'agreement_verification.yaml'), 'r', encoding='utf-8') as file:
             data = yaml.load(file, Loader=yaml.FullLoader)
         self.verification_prompt = data['knowledge_qa']
     

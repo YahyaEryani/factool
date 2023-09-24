@@ -14,6 +14,7 @@ import pathlib
 import openai
 import re
 
+LLM_REPORT_API_KEY = str(os.getenv("LLM_REPORT_API_KEY"))
 
 # from factool.env_config import factool_env_config
 
@@ -116,6 +117,11 @@ class OpenAIChat():
                         temperature=self.config['temperature'],
                         top_p=self.config['top_p'],
                         request_timeout=self.config['request_timeout'],
+                        # Your custom headers
+                        headers = {
+                            "X-Api-Key":"Bearer " + LLM_REPORT_API_KEY,
+                            "X-User-Id": "yeryani-progen"
+                        }
                     )
                     return response
                 except openai.error.RateLimitError:
